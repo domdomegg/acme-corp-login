@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acme Corp. Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Mono';
+            text-align: center;
+            background: #2B2D42;
+            margin: 0;
+            padding: 0;
+        }
+
+        body>div {
+            margin-top: 100px;
+            background: white;
+            display: inline-flex;
+            border-radius: 10px;
+        }
+
+        div {
+            padding: 20px;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        #logo {
+            margin-bottom: -40px;
+            margin-top: -10px;
+            margin-right: -30px;
+            margin-left: -50px;
+        }
+
+        #form,
+        #loading,
+        #success {
+            width: 250px;
+        }
+
+        #form {
+            margin-top: 5px;
+            text-align: left;
+            padding-bottom: 20px;
+        }
+
+        #logocontainer {
+            margin-top: 40px;
+            margin-right: 30px;
+            margin-left: 30px;
+            height: 290px;
+        }
+
+        input {
+            width: 225px;
+            font-family: 'Space mono';
+            color: #222;
+            padding: 10px;
+            display: block;
+        }
+
+        .button {
+            width: 229px;
+            font-family: 'Space mono';
+            padding: 10px;
+            display: block;
+            border-radius: 2px;
+            color: white;
+            background: #FF6700;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .button:hover {
+            background: #FF9147;
+        }
+
+        .button:active {
+            background: #CC5200;
+        }
+
+        #wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 400px;
+            width: 100%;
+            z-index: -1;
+        }
+
+        #loading {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        #lds-ripple {
+            opacity: 1;
+            padding: 0px;
+            display: inline-block;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transition: opacity 0.5s ease;
+            left: 50%;
+            margin-left: -50px;
+            top: 40%;
+            margin-top: -50px;
+        }
+
+        #successIcon {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            transition: all 0.5s ease;
+            left: 50%;
+            margin-left: 0;
+            top: 40%;
+            margin-top: 0;
+        }
+
+        #lds-ripple div {
+            padding: 0;
+            position: absolute;
+            border: 4px solid #32908F;
+            opacity: 1;
+            border-radius: 50%;
+            animation: lds-ripple 1.25s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+
+        #lds-ripple div:nth-child(2) {
+            animation-delay: -0.625s;
+        }
+
+        @keyframes lds-ripple {
+            0% {
+                top: 46px;
+                left: 46px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            100% {
+                top: 0px;
+                left: 0px;
+                width: 92px;
+                height: 92px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="logocontainer">
+            <svg id="logo" width="250" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#26C485"
+                    d="M35.8,-66.7C45.5,-56.3,52,-45,58.8,-33.8C65.7,-22.5,72.9,-11.3,75.5,1.5C78.1,14.3,76.2,28.6,69.5,40.1C62.8,51.5,51.3,60.2,38.9,61.6C26.5,63,13.2,57.1,-1.1,59C-15.5,60.9,-30.9,70.6,-42,68.5C-53,66.3,-59.7,52.3,-60.7,38.9C-61.7,25.6,-57.1,12.8,-55.6,0.9C-54,-11,-55.6,-22,-53.8,-34C-52,-46.1,-46.8,-59.1,-37.3,-69.6C-27.8,-80.1,-13.9,-88,-0.4,-87.3C13,-86.5,26,-77.1,35.8,-66.7Z"
+                    transform="translate(100 100)" />
+            </svg>
+            <h2>Acme Corp.</h2>
+        </div>
+
+        <div id="form">
+            <label>Username</label>
+            <br />
+            <input type="text" />
+            <br />
+
+            <label>Password</label>
+            <br />
+            <input type="password" />
+            <br />
+
+            <label>2FA code</label>
+            <br />
+            <input type="text" />
+            <br />
+
+            <div class="button" id="loginButton">Login</div>
+        </div>
+
+        <div id="loading" style="display: none">
+            <p>Logging in...</p>
+            <div id="lds-ripple">
+                <div></div>
+                <div></div>
+            </div>
+            <svg id="successIcon" width="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#32908F" d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"/></svg>
+        </div>
+    </div>
+
+    <svg id="wave" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#32908F" fill-opacity="1" d="M0,0L21.8,16C43.6,32,87,64,131,96C174.5,128,218,160,262,170.7C305.5,181,349,171,393,165.3C436.4,160,480,160,524,181.3C567.3,203,611,245,655,261.3C698.2,277,742,267,785,224C829.1,181,873,107,916,90.7C960,75,1004,117,1047,160C1090.9,203,1135,245,1178,256C1221.8,267,1265,245,1309,234.7C1352.7,224,1396,224,1418,224L1440,224L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z">
+        </path>
+    </svg>
+    <script>
+        document.getElementById('loginButton').addEventListener('click', () => {
+            document.getElementById('form').style.display = 'none';
+            document.getElementById('loading').style.display = '';
+
+            setTimeout(() => {
+                document.getElementById('lds-ripple').style.opacity = '0';
+                document.getElementById('successIcon').style.opacity = '1';
+                document.getElementById('successIcon').style.marginLeft = '-50px';
+                document.getElementById('successIcon').style.marginTop = '-50px';
+                document.getElementById('successIcon').style.width = '100px';
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>
